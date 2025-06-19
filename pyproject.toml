@@ -1,0 +1,15 @@
+[project]
+name = "chestCancerClassification"
+version = "0.0.0"
+description = "A small python package for CNN app"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "abcdefya", email = "anh.dothe47@gmail.com" }
+]
+urls = { "Bug Tracker" = "https://github.com/abcdef_ya/Chest-Cancer-Classification/issues" }
+dependencies = [
+    "pip>=25.1.1",
+]
+
+[tool.uv] 
