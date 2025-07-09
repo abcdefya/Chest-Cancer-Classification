@@ -1,0 +1,15 @@
+artifact_uri: file:///d:/ML_DL%20Projects/Chest-Cancer-Classification/mlruns/0/387d5826a7b54bc6b9cd9246f0fc4a67/artifacts
+end_time: 1752029642448
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 387d5826a7b54bc6b9cd9246f0fc4a67
+run_name: burly-trout-300
+run_uuid: 387d5826a7b54bc6b9cd9246f0fc4a67
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752029616702
+status: 3
+tags: []
+user_id: dothe
