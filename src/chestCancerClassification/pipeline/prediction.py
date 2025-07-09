@@ -1,54 +1,32 @@
-stages:
-  data_ingestion:
-    cmd: python src/cnnClassifier/pipeline/stage_01_data_ingestion.py
-    deps:
-      - src/cnnClassifier/pipeline/stage_01_data_ingestion.py
-      - config/config.yaml
-    outs:
-      - artifacts/data_ingestion/Chest-CT-Scan-data
+import numpy as np
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+import os
 
 
-  prepare_base_model:
-    cmd: python src/cnnClassifier/pipeline/stage_02_prepare_base_model.py
-    deps:
-      - src/cnnClassifier/pipeline/stage_02_prepare_base_model.py
-      - config/config.yaml
-    params:
-      - IMAGE_SIZE
-      - INCLUDE_TOP
-      - CLASSES
-      - WEIGHTS
-      - LEARNING_RATE
-    outs:
-      - artifacts/prepare_base_model
+
+class PredictionPipeline:
+    def __init__(self,filename):
+        self.filename =filename
 
 
-  training:
-    cmd: python src/cnnClassifier/pipeline/stage_03_model_trainer.py
-    deps:
-      - src/cnnClassifier/pipeline/stage_03_model_trainer.py
-      - config/config.yaml
-      - artifacts/data_ingestion/Chest-CT-Scan-data
-      - artifacts/prepare_base_model
-    params:
-      - IMAGE_SIZE
-      - EPOCHS
-      - BATCH_SIZE
-      - AUGMENTATION
-    outs:
-      - artifacts/training/model.h5
+    
+    def predict(self):
+        ## load model
+        
+        # model = load_model(os.path.join("artifacts","training", "model.h5"))
+        model = load_model(os.path.join("model", "model.h5"))
 
+        imagename = self.filename
+        test_image = image.load_img(imagename, target_size = (224,224))
+        test_image = image.img_to_array(test_image)
+        test_image = np.expand_dims(test_image, axis = 0)
+        result = np.argmax(model.predict(test_image), axis=1)
+        print(result)
 
-  evaluation:
-    cmd: python src/cnnClassifier/pipeline/stage_04_model_evaluation.py
-    deps:
-      - src/cnnClassifier/pipeline/stage_04_model_evaluation.py
-      - config/config.yaml
-      - artifacts/data_ingestion/Chest-CT-Scan-data
-      - artifacts/training/model.h5
-    params:
-      - IMAGE_SIZE
-      - BATCH_SIZE
-    metrics:
-    - scores.json:
-        cache: false
+        if result[0] == 1:
+            prediction = 'Normal'
+            return [{ "image" : prediction}]
+        else:
+            prediction = 'Adenocarcinoma Cancer'
+            return [{ "image" : prediction}]
