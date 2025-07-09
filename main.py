@@ -1,7 +1,7 @@
 from chestCancerClassification.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 from chestCancerClassification.pipeline.stage_02_prepare_base_model import PrepareBaseModelTrainingPipeline
 from chestCancerClassification.pipeline.stage_03_model_trainer import ModelTrainingPipeline
-from chestCancerClassification.pipeline.stage_04_mode_evaluation import EvaluationPipeline
+from chestCancerClassification.pipeline.stage_04_model_evaluation import EvaluationPipeline
 from chestCancerClassification import logger
 
 STAGE_NAME = "Data Ingestion stage"
