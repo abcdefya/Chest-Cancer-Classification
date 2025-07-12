@@ -94,8 +94,3 @@ The project includes a complete CI/CD workflow for AWS deployment:
 2. Docker image is built and pushed to Amazon ECR
 3. Application is deployed to a self-hosted runner
 
-## License
-[Add your license information here]
-
-## Contributors
-[Add contributor information here]
