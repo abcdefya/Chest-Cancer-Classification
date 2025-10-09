@@ -95,3 +95,4 @@ The project includes a complete CI/CD workflow for AWS deployment:
 3. Application is deployed to a self-hosted runner
 
 This guy help me to land a AI Engineer job
+One day more
